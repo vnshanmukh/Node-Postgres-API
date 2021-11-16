@@ -16,6 +16,8 @@ app.get("/horrors/", api.getAllHorrors);
 app.get("/horrors/:id", api.getHorrorbyId);
 app.post("/horrors", api.posthorror);
 app.put("/horrors/:id", api.updateHorror);
+app.delete("/horrors/:id", api.deleteHorror);
+
 app.listen(port, () => {
   console.log(`api is running on port ${port}.`);
 });

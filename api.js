@@ -1,3 +1,4 @@
+const { request, response } = require("express");
 const { Pool } = require("pg");
 const pool = new Pool({
   user: "root",
@@ -58,9 +59,21 @@ const updateHorror = (request, response) => {
   );
 };
 
+const deleteHorror = (request, response) => {
+  const id = parseInt(request.params.id);
+
+  pool.query("DELETE FROM horrors WHERE id = $1", [id], (error, results) => {
+    if (error) {
+      throw error;
+    }
+    response.status(200).send(`horror deleted with ID: ${id}`);
+  });
+};
+
 module.exports = {
   getAllHorrors,
   getHorrorbyId,
   posthorror,
   updateHorror,
+  deleteHorror,
 };
